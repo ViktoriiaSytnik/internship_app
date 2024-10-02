@@ -1,3 +1,4 @@
-web: gunicorn internship_app:internship_app
+web: gunicorn app:app
+
 
 
