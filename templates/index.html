@@ -1,16 +1,47 @@
-{% extends 'base.html' %}
-{% block header %}<title>CLarity Coders!!!!</title>{% endblock %}
-{% block body %}
-<h1>Weight Converter</h1>
-<form action="/" method="POST">
-    <label for="weight">Weight:</label><br>
-    <input type="text" id="weight" name="weight"><br>
-    <select name="unit" id="unit">
-        <option value="pounds">Pounds</option>
-        <option value="kilograms">Kilograms</option>
-    </select>
-    <input type="submit" value="Get Weight">
-</form>
-{{ weight }}
-{{ unit }}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Case Studies</title>
+    <style>
+        body {
+            background-color: #121212; /* Dark background */
+            color: white; /* White text */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 40px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button-container button {
+            background-color: #6200ea; /* Purple background */
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container button:hover {
+            background-color: #3700b3; /* Darker purple on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Case Studies</h1>
+    <div class="button-container">
+        <button onclick="window.location.href='/case-study-1'">Case Study 1</button>
+        <button onclick="window.location.href='/case-study-2'">Case Study 2</button>
+        <button onclick="window.location.href='/case-study-3'">Case Study 3</button>
+    </div>
+</body>
+</html>
