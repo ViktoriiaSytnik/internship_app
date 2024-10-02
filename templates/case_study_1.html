@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tender Info</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abolition:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Abolition', sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tender Information</h1>
+    <form method="POST">
+        <label for="tender_ids">Enter Tender IDs:</label><br>
+        <textarea id="tender_ids" name="tender_ids" rows="5" cols="50"></textarea><br><br>
+        <button type="submit">Get Info</button>
+    </form>
+    <h2>Results:</h2>
+    <div id="results">
+        <!-- Results from Flask will appear here -->
+        {{ result|safe }}
+    </div>
+</body>
+</html>
