@@ -1,61 +1,68 @@
 <!DOCTYPE html>
-<html lang="{{ language }}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>Language Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap" rel="stylesheet">
     <style>
-        /* Fonts and colors similar to the provided image */
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
         body {
-            font-family: 'Permanent Marker', cursive;
-            background-color: #F5826E;
-            color: #2D2D2D;
             margin: 0;
             padding: 0;
+            font-family: 'Baloo 2', cursive;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            height: 100vh;
+            gap: 20px;
         }
-        .intro-text {
-            width: 60%;
-            font-size: 1.5em;
-            line-height: 1.5em;
-        }
-        .intro-text p {
-            margin: 20px 0;
-        }
-        .photo {
-            width: 30%;
-        }
-        .photo img {
-            width: 100%;
+        .section {
+            width: 300px;
+            height: 300px;
+            text-align: center;
             border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
         }
-        .scroll-hint {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2em;
+        /* Colors for each section */
+        .german {
+            background-color: #e99b93; /* Light Pinkish */
+        }
+        .french {
+            background-color: #f44d33; /* Bright Orange */
+        }
+        .english {
+            background-color: #2c2c69; /* Dark Blue */
+        }
+        .section:hover {
+            transform: scale(1.2);
+        }
+        .section a {
+            text-decoration: none;
+            color: inherit;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="intro-text">
-            <p>{{ message }}</p>
+        <div class="section german">
+            <a href="{{ url_for('set_language', language='de') }}">GERMAN</a>
         </div>
-        <div class="photo">
-            <img src="{{ url_for('static', filename='my_photo.png') }}" alt="Viktoriia's Photo">
+        <div class="section french">
+            <a href="{{ url_for('set_language', language='fr') }}">FRENCH</a>
         </div>
-    </div>
-    <div class="scroll-hint">
-        <p>Scroll down to see my projects</p>
+        <div class="section english">
+            <a href="{{ url_for('set_language', language='en') }}">ENGLISH</a>
+        </div>
     </div>
 </body>
 </html>
