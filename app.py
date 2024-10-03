@@ -1,30 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for
-import requests
-import base64
-from cryptography.hazmat.primitives.serialization import pkcs7
-from cryptography.hazmat.backends import default_backend
-from cryptography import x509
-from cryptography.x509.oid import ObjectIdentifier
-from pyasn1.codec.der.decoder import decode
-from pyasn1.type import univ
-import re
-import pandas as pd
 import random
+import pandas as pd
 
 app = Flask(__name__)
 
 # Base URL for fetching tenders
 base_tender_url = 'https://public-api.prozorro.gov.ua/api/2.5/tenders/'
 
+# Landing page route
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/set_language', methods=['POST'])
-def set_language():
-    lang = request.form['language']
-    return redirect(url_for('home', language=lang))
+# Setting the language and redirecting to the home page
+@app.route('/set_language/<language>')
+def set_language(language):
+    return redirect(url_for('home', language=language))
 
+# Home page based on selected language
 @app.route('/home/<language>')
 def home(language):
     messages = {
@@ -35,21 +28,21 @@ def home(language):
     message = messages.get(language, messages['en'])
     return render_template('home.html', language=language, message=message)
 
+# Case Study 1
 @app.route('/case_study_1')
 def case_study_1():
-    # Your code for Case Study 1 (Tender Info App)
     return render_template('case_study_1.html')
 
+# Case Study 2 - Excel Data
 @app.route('/case_study_2')
 def case_study_2():
-    # This will render the page with Excel file and the ability to edit
     excel_file_path = r'C:\Users\Asus\PycharmProjects\internship_start\S&P 500 Capitalization.xlsx'
     df = pd.read_excel(excel_file_path)
     return render_template('case_study_2.html', tables=[df.to_html(classes='data')])
 
+# Case Study 3 - Random Number Game
 @app.route('/case_study_3')
 def case_study_3():
-    # Probability game logic (simple random guessing game)
     random_number = random.randint(1, 10)
     return render_template('case_study_3.html', number=random_number)
 

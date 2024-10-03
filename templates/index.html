@@ -3,35 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <link href="https://fonts.googleapis.com/css2?family=Abolition:wght@400;600&display=swap" rel="stylesheet">
+    <title>Language Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Abolition', sans-serif;
-            background-color: #1e1e1e;
-            color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family: 'Baloo 2', cursive;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        .loading {
-            width: 100px;
-            height: 100px;
-            border: 5px solid #fff;
-            border-top: 5px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .container {
+            display: flex;
+            gap: 20px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .section {
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        /* Colors for each section */
+        .german {
+            background-color: #e99b93; /* Light Pinkish */
+        }
+        .french {
+            background-color: #f44d33; /* Bright Orange */
+        }
+        .english {
+            background-color: #2c2c69; /* Dark Blue */
+        }
+        .section:hover {
+            transform: scale(1.2);
+        }
+        .section a {
+            text-decoration: none;
+            color: inherit;
         }
     </style>
 </head>
 <body>
-    <div class="loading"></div>
-    <h1>Choose Your Language</h1>
-    <form method="POST" action="/set_language">
-        <button name="language" value="en">English</button>
-        <button name="language" value="fr">French</button>
-        <button name="language" value="de">German</button>
-    </form>
+    <div class="container">
+        <div class="section german">
+            <a href="{{ url_for('set_language', language='de') }}">GERMAN</a>
+        </div>
+        <div class="section french">
+            <a href="{{ url_for('set_language', language='fr') }}">FRENCH</a>
+        </div>
+        <div class="section english">
+            <a href="{{ url_for('set_language', language='en') }}">ENGLISH</a>
+        </div>
+    </div>
 </body>
 </html>
