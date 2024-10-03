@@ -1,0 +1,43 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffcccc; /* Example background color */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.my-photo {
+    width: 250px; /* Adjust size as needed */
+    border-radius: 10px;
+    margin-left: 20px; /* Ensure photo is aligned properly */
+}
+
+.case-studies {
+    margin-top: 30px;
+}
+
+.case-studies a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: #62a8e5; /* Example button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.case-studies a:hover {
+    background-color: #4b9bce; /* Darker on hover */
+}
