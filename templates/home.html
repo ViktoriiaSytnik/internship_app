@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
         body {
             font-family: 'Permanent Marker', cursive;
-            background-color: #F5826E;
+            background-color: #F5826E; /* Background similar to your image */
             color: #2D2D2D;
             margin: 0;
             padding: 0;
@@ -36,12 +36,43 @@
             width: 100%;
             border-radius: 10px;
         }
-        .scroll-hint {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2em;
+
+        /* Case study buttons styling (same as language buttons) */
+        .case-studies-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 20px;
+        }
+        .case-button {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+        .case-button a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Colors for each case study button */
+        .case-study-1 {
+            background-color: #e99b93; /* Light Pinkish */
+        }
+        .case-study-2 {
+            background-color: #f44d33; /* Bright Orange */
+        }
+        .case-study-3 {
+            background-color: #2c2c69; /* Dark Blue */
+        }
+        .case-button:hover {
+            transform: scale(1.2);
         }
     </style>
 </head>
@@ -54,8 +85,18 @@
             <img src="{{ url_for('static', filename='my_photo.png') }}" alt="Viktoriia's Photo">
         </div>
     </div>
-    <div class="scroll-hint">
-        <p>Scroll down to see my projects</p>
+
+    <!-- Case Studies buttons, same style as language buttons -->
+    <div class="case-studies-container">
+        <div class="case-button case-study-1">
+            <a href="{{ url_for('case_study_1') }}">Case Study 1</a>
+        </div>
+        <div class="case-button case-study-2">
+            <a href="{{ url_for('case_study_2') }}">Case Study 2</a>
+        </div>
+        <div class="case-button case-study-3">
+            <a href="{{ url_for('case_study_3') }}">Case Study 3</a>
+        </div>
     </div>
 </body>
 </html>
