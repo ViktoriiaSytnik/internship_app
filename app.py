@@ -1,21 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for
-import pandas as pd
 import random
+import pandas as pd
 
 app = Flask(__name__)
 
-# Base URL for fetching tenders (if needed in future)
-# base_tender_url = 'https://public-api.prozorro.gov.ua/api/2.5/tenders/'
+# Base URL for fetching tenders
+base_tender_url = 'https://public-api.prozorro.gov.ua/api/2.5/tenders/'
 
+# Landing page route
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/set_language', methods=['POST'])
-def set_language():
-    lang = request.form['language']
-    return redirect(url_for('home', language=lang))
+# Setting the language and redirecting to the home page
+@app.route('/set_language/<language>')
+def set_language(language):
+    return redirect(url_for('home', language=language))
 
+# Home page based on selected language
 @app.route('/home/<language>')
 def home(language):
     messages = {
@@ -26,17 +28,19 @@ def home(language):
     message = messages.get(language, messages['en'])
     return render_template('home.html', language=language, message=message)
 
+# Case Study 1
 @app.route('/case_study_1')
 def case_study_1():
     return render_template('case_study_1.html')
 
+# Case Study 2 - Excel Data
 @app.route('/case_study_2')
 def case_study_2():
-    # Adjust the path to your Excel file as needed
-    excel_file_path = r'C:\path\to\your\file\S&P 500 Capitalization.xlsx'
+    excel_file_path = r'C:\Users\Asus\PycharmProjects\internship_start\S&P 500 Capitalization.xlsx'
     df = pd.read_excel(excel_file_path)
     return render_template('case_study_2.html', tables=[df.to_html(classes='data')])
 
+# Case Study 3 - Random Number Game
 @app.route('/case_study_3')
 def case_study_3():
     random_number = random.randint(1, 10)

@@ -1,19 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Welcome</title>
+    <title>Landing Page</title>
+    <style>
+        /* Fonts and colors similar to the provided image */
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        body {
+            font-family: 'Permanent Marker', cursive;
+            background-color: #F5826E;
+            color: #2D2D2D;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            height: 100vh;
+        }
+        .intro-text {
+            width: 60%;
+            font-size: 1.5em;
+            line-height: 1.5em;
+        }
+        .intro-text p {
+            margin: 20px 0;
+        }
+        .photo {
+            width: 30%;
+        }
+        .photo img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
-    <div class="language-selection">
-        <h1>Select Language</h1>
-        <form action="{{ url_for('set_language') }}" method="post">
-            <button type="submit" name="language" value="en">English</button>
-            <button type="submit" name="language" value="fr">French</button>
-            <button type="submit" name="language" value="de">German</button>
-        </form>
+    <div class="container">
+        <div class="intro-text">
+            <p>{{ message }}</p>
+        </div>
+        <div class="photo">
+            <img src="{{ url_for('static', filename='my_photo.png') }}" alt="Viktoriia's Photo">
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <p>Scroll down to see my projects</p>
     </div>
 </body>
 </html>
