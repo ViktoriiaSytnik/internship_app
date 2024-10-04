@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+import os
+
+from flask import Flask, render_template, request, redirect, url_for, send_file
 import random
 import pandas as pd
 import requests
@@ -16,6 +18,7 @@ app = Flask(__name__)
 # Base URL for fetching tenders
 base_tender_url = 'https://public-api.prozorro.gov.ua/api/2.5/tenders/'
 
+
 # Function to decode base64 if needed
 def decode_base64_if_needed(data):
     try:
@@ -23,6 +26,7 @@ def decode_base64_if_needed(data):
         return decoded_data
     except base64.binascii.Error:
         return data
+
 
 # Function to parse EDRPOU/RNOKPP strings
 def parse_edrpou_string(input_string):
@@ -44,6 +48,7 @@ def parse_edrpou_string(input_string):
                     current_dict[current_field] += ' ' + line.strip()
             dicts.append(current_dict)
     return dicts
+
 
 # Function to extract PKCS#7 content
 def extract_pkcs7_content(pkcs7_data):
@@ -87,6 +92,7 @@ def extract_pkcs7_content(pkcs7_data):
     except Exception as e:
         return None
 
+
 # Function to download file
 def download_file(url):
     try:
@@ -98,6 +104,7 @@ def download_file(url):
     except requests.exceptions.RequestException:
         return None, None
 
+
 # Function to process signature
 def process_signature(url):
     file_data, mime_type = download_file(url)
@@ -107,6 +114,7 @@ def process_signature(url):
         return signer_info
     else:
         return None
+
 
 # Function to process the tender
 def process_tender(tender_id):
@@ -142,15 +150,18 @@ def process_tender(tender_id):
     else:
         return f"<p>Не вдалося отримати дані тендера з ID {tender_id}. Статус-код: {response.status_code}</p>"
 
+
 # Landing page route
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 # Setting the language and redirecting to the home page
 @app.route('/set_language/<language>')
 def set_language(language):
     return redirect(url_for('home', language=language))
+
 
 # Home page based on selected language
 @app.route('/home/<language>')
@@ -163,6 +174,13 @@ def home(language):
     message = messages.get(language, messages['en'])
     return render_template('home.html', language=language, message=message)
 
+
+@app.route('/my_photo')
+def my_photo():
+    image_path = os.path.join(os.getcwd(), 'templates', 'my_photo.png')
+    return send_file(image_path, mimetype='image/png')
+
+
 # Case Study 1 - Tender Processing
 @app.route('/case_study_1', methods=['GET', 'POST'])
 def case_study_1():
@@ -173,6 +191,7 @@ def case_study_1():
             result += process_tender(tender_id) + "<br><br>"
     return render_template('case_study_1.html', result=result)
 
+
 # Case Study 2 - Excel Data
 @app.route('/case_study_2')
 def case_study_2():
@@ -180,11 +199,13 @@ def case_study_2():
     df = pd.read_excel(excel_file_path)
     return render_template('case_study_2.html', tables=[df.to_html(classes='data')])
 
+
 # Case Study 3 - Random Number Game
 @app.route('/case_study_3')
 def case_study_3():
     random_number = random.randint(1, 10)
     return render_template('case_study_3.html', number=random_number)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
