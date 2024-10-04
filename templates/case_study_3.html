@@ -3,27 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Probability Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Abolition:wght@400;600&display=swap" rel="stylesheet">
+    <title>Invoice Workflow Optimization</title>
     <style>
         body {
-            font-family: 'Abolition', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #1e1e1e;
             color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #2c2c69;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #fff;
+            text-align: center;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        .missing {
+            background-color: #f44d33;
+            color: #fff;
+        }
+
+        .complete {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .notify-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f44d33;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .notify-button:hover {
+            background-color: #e63920;
+        }
+
+        .output {
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <h1>Case Study 3: Probability Game</h1>
-    <p>Try your luck and play a simple probability game!</p>
-    <button id="playButton">Play Game</button>
-    <p id="gameResult"></p>
+    <h1>Invoice Workflow Optimization</h1>
+    <p>Simulate the approval and optimization of invoices in a workflow!</p>
+
+    <!-- Invoice Table -->
+    <table id="invoiceTable">
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Vendor</th>
+                <th>Amount ($)</th>
+                <th>Status</th>
+                <th>Missing Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>INV001</td>
+                <td>Vendor A</td>
+                <td>1200</td>
+                <td class="status">Pending</td>
+                <td class="missing">Tax ID</td>
+            </tr>
+            <tr>
+                <td>INV002</td>
+                <td>Vendor B</td>
+                <td>3200</td>
+                <td class="status">Approved</td>
+                <td class="complete">None</td>
+            </tr>
+            <tr>
+                <td>INV003</td>
+                <td>Vendor C</td>
+                <td>4500</td>
+                <td class="status">Pending</td>
+                <td class="missing">Invoice Date</td>
+            </tr>
+            <tr>
+                <td>INV004</td>
+                <td>Vendor D</td>
+                <td>2100</td>
+                <td class="status">Approved</td>
+                <td class="complete">None</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Notify Button -->
+    <button class="notify-button" onclick="checkMissingData()">Notify Missing Data</button>
+
+    <!-- Output section -->
+    <div class="output">
+        <p id="notificationOutput"></p>
+    </div>
 
     <script>
-        document.getElementById('playButton').addEventListener('click', function() {
-            const result = Math.random() > 0.5 ? 'You Win!' : 'You Lose!';
-            document.getElementById('gameResult').innerText = result;
-        });
+        function checkMissingData() {
+            // Get all rows in the table
+            const rows = document.querySelectorAll("#invoiceTable tbody tr");
+            let notificationMessage = "";
+
+            rows.forEach(row => {
+                const statusCell = row.querySelector(".status");
+                const missingInfoCell = row.querySelector(".missing");
+
+                // Check if there is missing information and status is pending
+                if (missingInfoCell && statusCell.innerText === "Pending") {
+                    const invoiceID = row.cells[0].innerText;
+                    const missingInfo = missingInfoCell.innerText;
+                    notificationMessage += `Invoice ${invoiceID} is missing: ${missingInfo}.\n`;
+                }
+            });
+
+            // Display notification message
+            const notificationOutput = document.getElementById("notificationOutput");
+            if (notificationMessage) {
+                notificationOutput.innerText = notificationMessage;
+            } else {
+                notificationOutput.innerText = "All pending invoices have complete information!";
+            }
+        }
     </script>
 </body>
 </html>
