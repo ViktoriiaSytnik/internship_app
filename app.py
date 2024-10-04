@@ -174,7 +174,7 @@ def home(language):
     message = messages.get(language, messages['en'])
     return render_template('home.html', language=language, message=message)
 
-
+6
 @app.route('/my_photo')
 def my_photo():
     image_path = os.path.join(os.getcwd(), 'templates', 'my_photo.png')
