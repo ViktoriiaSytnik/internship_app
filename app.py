@@ -204,10 +204,8 @@ def case_study_1():
 # Case Study 2 - Excel Data
 @app.route('/case_study_2')
 def case_study_2():
-    excel_file_path = r'C:\Users\Asus\PycharmProjects\internship_start\S&P 500 Capitalization.xlsx'
-    df = pd.read_excel(excel_file_path)
-    return render_template('case_study_2.html', tables=[df.to_html(classes='data')])
-
+    # No need to load any Excel file, just render the HTML with the embedded Google Sheet.
+    return render_template('case_study_2.html')
 
 # Case Study 3 - Random Number Game
 @app.route('/case_study_3')
