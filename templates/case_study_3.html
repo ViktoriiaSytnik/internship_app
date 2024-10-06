@@ -1,147 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice Workflow Optimization</title>
+    <title>R&D Research</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #DBED4F; /* Светло-зеленый фон */
+            color: #333;
         }
 
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #2c2c69;
-            color: white;
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        th, td {
-            padding: 12px;
-            border: 1px solid #fff;
-            text-align: center;
+        .logo img {
+            height: 70px; /* Размер логотипа */
+            margin-right: 20px;
         }
 
-        th {
-            background-color: #444;
+        .title {
+            font-size: 20px; /* Размер шрифта заголовка */
+            font-weight: 700;
         }
 
-        .missing {
-            background-color: #f44d33;
-            color: #fff;
+        .container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 60px); /* Высота под контейнер */
         }
 
-        .complete {
-            background-color: #4CAF50;
-            color: white;
+        .pdf-viewer {
+            width: 65%; /* Ширина PDF */
+            border-right: 1px solid #ddd;
+            padding: 10px;
+            border: 2px solid yellow; /* Желтая рамка для PDF */
         }
 
-        .notify-button {
+        .pdf-viewer iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-section {
+            width: 35%; /* Ширина секции интервью */
+            padding: 30px; /* Отступы */
+            overflow-y: auto;
+        }
+
+        h2 {
+            font-weight: 700;
+            text-transform: uppercase; /* Капслок для заголовка */
+        }
+
+        /* Стили для списка университетов */
+        .universities {
             margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #f44d33;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .notify-button:hover {
-            background-color: #e63920;
-        }
-
-        .output {
-            margin-top: 30px;
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
+
 <body>
-    <h1>Invoice Workflow Optimization</h1>
-    <p>Simulate the approval and optimization of invoices in a workflow!</p>
-
-    <!-- Invoice Table -->
-    <table id="invoiceTable">
-        <thead>
-            <tr>
-                <th>Invoice ID</th>
-                <th>Vendor</th>
-                <th>Amount ($)</th>
-                <th>Status</th>
-                <th>Missing Information</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>INV001</td>
-                <td>Vendor A</td>
-                <td>1200</td>
-                <td class="status">Pending</td>
-                <td class="missing">Tax ID</td>
-            </tr>
-            <tr>
-                <td>INV002</td>
-                <td>Vendor B</td>
-                <td>3200</td>
-                <td class="status">Approved</td>
-                <td class="complete">None</td>
-            </tr>
-            <tr>
-                <td>INV003</td>
-                <td>Vendor C</td>
-                <td>4500</td>
-                <td class="status">Pending</td>
-                <td class="missing">Invoice Date</td>
-            </tr>
-            <tr>
-                <td>INV004</td>
-                <td>Vendor D</td>
-                <td>2100</td>
-                <td class="status">Approved</td>
-                <td class="complete">None</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Notify Button -->
-    <button class="notify-button" onclick="checkMissingData()">Notify Missing Data</button>
-
-    <!-- Output section -->
-    <div class="output">
-        <p id="notificationOutput"></p>
+    <div class="header">
+        <div class="logo">
+            <img src="/logo" alt="Company Logo">
+        </div>
+        <div class="title">R&D Research, Commercialization of Science in Ukraine</div>
     </div>
 
-    <script>
-        function checkMissingData() {
-            // Get all rows in the table
-            const rows = document.querySelectorAll("#invoiceTable tbody tr");
-            let notificationMessage = "";
+    <div class="container">
+        <div class="pdf-viewer">
+            <iframe src="/pdf" frameborder="0"></iframe>
+            <div class="translated">Translated from Ukrainian</div>
+        </div>
+        <div class="text-section">
+            <h2>As a part of the team, I conducted interviews with the following international benchmarks:</h2>
+            <ul class="universities">
+                <li><strong>University of California, Berkeley:</strong> Rick Rasmussen is a research associate and a native of Silicon Valley, who participated in five IPOs, three company sales totaling over a billion dollars, assisted more than a dozen accelerators, and mentored over 1000 companies. He provides practical knowledge and consulting to students and young entrepreneurs, combining academic research with industrial challenges.</li>
 
-            rows.forEach(row => {
-                const statusCell = row.querySelector(".status");
-                const missingInfoCell = row.querySelector(".missing");
+                <li><strong>Cornell Tech:</strong> Charles Whitehead is the director of the program in law, technology, and entrepreneurship at Cornell Tech. He specializes in the legal aspects of entrepreneurship and technological innovations, helping students develop their business ideas within the context of the modern legal environment.</li>
 
-                // Check if there is missing information and status is pending
-                if (missingInfoCell && statusCell.innerText === "Pending") {
-                    const invoiceID = row.cells[0].innerText;
-                    const missingInfo = missingInfoCell.innerText;
-                    notificationMessage += `Invoice ${invoiceID} is missing: ${missingInfo}.\n`;
-                }
-            });
+                <li><strong>University of Groningen:</strong> Anik Wenda works at the University of Groningen as an impact officer in the field of entrepreneurship. She helps young entrepreneurs develop startups by providing advice on business planning and networking, as well as supporting educational initiatives in entrepreneurship within the university's curricula.</li>
 
-            // Display notification message
-            const notificationOutput = document.getElementById("notificationOutput");
-            if (notificationMessage) {
-                notificationOutput.innerText = notificationMessage;
-            } else {
-                notificationOutput.innerText = "All pending invoices have complete information!";
-            }
-        }
-    </script>
+                <li><strong>Campus Groningen:</strong> Ronald Hesse leads business development at Triade and is the chief business developer for Campus Groningen. His activities include creating and supporting innovative ecosystems that promote the growth of startups and strengthen ties between academic institutions and business.</li>
+
+                <li><strong>Massachusetts Institute of Technology (MIT):</strong> Dr. Roman Lubinski works in the MIT Venture Mentoring Service, where he provides mentoring support to startups. His experience includes advising entrepreneurs and providing strategic advice for the growth and scaling of innovative enterprises.</li>
+
+                <li><strong>Stanford University:</strong> Barry Katz is a professor at Stanford University, where he teaches in the Department of Mechanical Engineering. He specializes in design and innovation, combining academic research with practical approaches to developing new products and services.</li>
+
+                <li><strong>Sunrise Tech Park:</strong> Laima Balčiūnė manages Sunrise Tech Park, where she supports innovative startups and promotes the development of the entrepreneurial ecosystem by creating conditions for collaboration between business and science.</li>
+
+                <li><strong>UnternehmerTUM:</strong> Constanze Karl is a Senior Project Manager for International Cooperation at UnternehmerTUM. She is involved in international cooperation and supporting startups, helping them expand their activities in international markets.</li>
+
+                <li><strong>Aalto University:</strong> Aalto University, established in 2010 by merging three leading Finnish institutions, is a leading research university in Finland. Aalto University specializes in technology, economics, arts, and design, actively promoting innovation and entrepreneurship through its programs and collaborations with industry partners.</li>
+
+                <li><strong>University of Warwick:</strong> Founded in 1965, the University of Warwick is a prestigious public research university in Coventry, England. Warwick is a center for research and innovation with numerous research centers focusing on health, artificial intelligence, and sustainable development.</li>
+            </ul>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -128,7 +128,7 @@ def process_tender(tender_id):
         procuring_entity_id = procuring_entity.get('identifier', {}).get('id', '')
         procuring_entity_contact_name = procuring_entity.get('contactPoint', {}).get('name', '')
 
-        result = f"<h3>Інформація про закупівельну організацію:</h3>"
+        result = f"<h3>Company`s Information:</h3>"
         result += f"<p><strong>Procuring Entity ID:</strong> {procuring_entity_id}</p>"
         result += f"<p><strong>Contact Name:</strong> {procuring_entity_contact_name}</p>"
 
@@ -138,12 +138,12 @@ def process_tender(tender_id):
                 signature_url = doc['url']
                 signer_info = process_signature(signature_url)
                 if signer_info:
-                    result += "<h3>Інформація про підписувача:</h3>"
-                    result += f"<p><strong>РНОКПП:</strong> {signer_info.get('РНОКПП')}</p>"
-                    result += f"<p><strong>Код ЄДРПОУ:</strong> {signer_info.get('Код ЄДРПОУ')}</p>"
-                    result += f"<p><strong>Посада:</strong> {signer_info.get('Посада')}</p>"
-                    result += f"<p><strong>ПІБ:</strong> {signer_info.get('ПІБ')}</p>"
-                    result += f"<p><strong>Організація:</strong> {signer_info.get('Організація')}</p>"
+                    result += "<h3>Signer`s data:</h3>"
+                    result += f"<p><strong>Tax Number:</strong> {signer_info.get('РНОКПП')}</p>"
+                    result += f"<p><strong>Organisation`s code:</strong> {signer_info.get('Код ЄДРПОУ')}</p>"
+                    result += f"<p><strong>Profession:</strong> {signer_info.get('Посада')}</p>"
+                    result += f"<p><strong>Name/Surname:</strong> {signer_info.get('ПІБ')}</p>"
+                    result += f"<p><strong>Organisation:</strong> {signer_info.get('Організація')}</p>"
                 else:
                     result += f"<p>Signature processing failed for Tender ID: {tender_id}</p>"
         return result
@@ -167,15 +167,15 @@ def set_language(language):
 @app.route('/home/<language>')
 def home(language):
     messages = {
-        'en': "Thank you for landing on my page and your time. My name is Sytnik Viktoriia, I am a student at FH des BFI Wien and I made this website myself (programming is my hobby). I also love data analytics, fighting financial crime and creative solutions. On the page below you can find examples of my projects. Have a great time!",
-        'fr': "Merci d'avoir atterri sur ma page et de m'avoir consacré du temps. Je m'appelle Sytnik Viktoria, j'étudie à la FH des BFI Wien et j'ai créé ce site web moi-même (la programmation est mon hobby). J'aime aussi analyse des données, la lutte contre la criminalité financière et les solutions créatives. Sur la page ci-dessous, vous trouverez des exemples de mes projets. Je vous souhaite de passer un bon moment !",
-        'de': "Danke, dass du hier vorbeigeschaut hast und dir Zeit nimmst. Ich bin die Victoria Sytnik, studiere an der FH des BFI in Wien und hab diese Webseite selbst gestaltet (Programmieren ist mein Hobby). Außerdem bin ich verrückt nach data analytik, der Bekämpfung von Finanzkriminalität und finde kreative Lösungen super. Unten auf der Seite findest du Beispiele meiner Projekte. Ich wünsch dir eine tolle Zeit!"
+        'en': "Thank you for landing on my page and your time. My name is Sytnik Viktoriia, I am currently a student in the European Economy and Business Management programme. I made this website myself (programming is my hobby). I also love data analytics, fighting financial crime, and finding creative solutions to complex challenges. On the page below you can find examples of my projects. Have a great time exploring!",
+
+        'fr': "Merci d'avoir atterri sur ma page et pour votre temps. Je m'appelle Sytnik Viktoria, je suis actuellement étudiante dans le programme d'Économie Européenne et Gestion d'Entreprise. J'ai créé ce site web moi-même (la programmation est mon passe-temps). J'aime aussi l'analyse de données, la lutte contre la criminalité financière et trouver des solutions créatives aux défis complexes. Sur la page ci-dessous, vous pouvez trouver des exemples de mes projets. Passez un excellent moment à explorer !",
+
+        'de': "Danke, dass Sie auf meiner Seite gelandet sind und für Ihre Zeit. Mein Name ist Sytnik Victoria, ich bin derzeit Studentin im Programm für Europäische Wirtschaft und Unternehmensführung. Ich habe diese Website selbst erstellt (Programmieren ist mein Hobby). Ich liebe auch Datenanalyse, die Bekämpfung von Finanzkriminalität und das Finden kreativer Lösungen für komplexe Herausforderungen. Auf der Seite unten finden Sie Beispiele meiner Projekte. Viel Spaß beim Erkunden!"
     }
     message = messages.get(language, messages['en'])
     return render_template('home.html', language=language, message=message)
 
-
-6
 
 
 @app.route('/my_photo')
@@ -207,7 +207,19 @@ def case_study_2():
     # No need to load any Excel file, just render the HTML with the embedded Google Sheet.
     return render_template('case_study_2.html')
 
-# Case Study 3 - Random Number Game
+
+@app.route('/logo')
+def logo():
+    image_path = os.path.join(os.getcwd(), 'templates', 'logo.png')
+    return send_file(image_path, mimetype='image/png')
+
+
+@app.route('/pdf')
+def pdf():
+    pdf_path = os.path.join(os.getcwd(), 'templates', 'business&science report draft en.pdf')
+    return send_file(pdf_path, mimetype='application/pdf')
+
+
 @app.route('/case_study_3')
 def case_study_3():
     random_number = random.randint(1, 10)
